@@ -41,6 +41,8 @@
             this.lblBatteryLifeRemaining = new System.Windows.Forms.Label();
             this.lblBatteryLifeRemainingValue = new System.Windows.Forms.Label();
             this.tmrRefresh = new System.Windows.Forms.Timer(this.components);
+            this.chbAutoStart = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // btnClose
@@ -171,12 +173,24 @@
             this.tmrRefresh.Interval = 60000;
             this.tmrRefresh.Tick += new System.EventHandler(this.tmrRefresh_Tick);
             // 
+            // chbAutoStart
+            // 
+            this.chbAutoStart.AutoSize = true;
+            this.chbAutoStart.Location = new System.Drawing.Point(258, 103);
+            this.chbAutoStart.Name = "chbAutoStart";
+            this.chbAutoStart.Size = new System.Drawing.Size(15, 14);
+            this.chbAutoStart.TabIndex = 12;
+            this.toolTip1.SetToolTip(this.chbAutoStart, "Start with Windows");
+            this.chbAutoStart.UseVisualStyleBackColor = true;
+            this.chbAutoStart.CheckedChanged += new System.EventHandler(this.chbAutoStart_CheckedChanged);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(284, 126);
+            this.Controls.Add(this.chbAutoStart);
             this.Controls.Add(this.lblBatteryLifeRemainingValue);
             this.Controls.Add(this.lblBatteryLifeRemaining);
             this.Controls.Add(this.lblBatteryFullLifetimeValue);
@@ -192,8 +206,10 @@
             this.MinimizeBox = false;
             this.Name = "FormMain";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "FormMain";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,6 +229,8 @@
         private System.Windows.Forms.Label lblBatteryLifeRemaining;
         private System.Windows.Forms.Label lblBatteryLifeRemainingValue;
         private System.Windows.Forms.Timer tmrRefresh;
+        private System.Windows.Forms.CheckBox chbAutoStart;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

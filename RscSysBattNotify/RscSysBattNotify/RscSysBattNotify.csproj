@@ -46,6 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\RscUtilsCs\MessageBoxEx.cs">
+      <Link>MessageBoxEx.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\RscUtilsCs\MessageBoxEx.designer.cs">
+      <Link>MessageBoxEx.designer.cs</Link>
+      <DependentUpon>MessageBoxEx.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +62,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="..\RscUtilsCs\MessageBoxEx.resx">
+      <Link>MessageBoxEx.resx</Link>
+      <DependentUpon>MessageBoxEx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
