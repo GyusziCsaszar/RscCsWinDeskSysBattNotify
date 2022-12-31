@@ -32,7 +32,6 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.lblPowerLineValue = new System.Windows.Forms.Label();
             this.lblPowerLine = new System.Windows.Forms.Label();
-            this.lblBatteryCharge = new System.Windows.Forms.Label();
             this.lblBatteryChargeValue = new System.Windows.Forms.Label();
             this.lblBatteryLife = new System.Windows.Forms.Label();
             this.lblBatteryLifeValue = new System.Windows.Forms.Label();
@@ -45,6 +44,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnHide = new System.Windows.Forms.Button();
             this.lblRefreshRate = new System.Windows.Forms.Label();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnClose
@@ -54,7 +54,7 @@
             this.btnClose.Location = new System.Drawing.Point(6, 97);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(26, 23);
-            this.btnClose.TabIndex = 2;
+            this.btnClose.TabIndex = 4;
             this.btnClose.Text = "X";
             this.toolTip1.SetToolTip(this.btnClose, "Exit application");
             this.btnClose.UseVisualStyleBackColor = true;
@@ -64,7 +64,7 @@
             // 
             this.lblPowerLineValue.AutoSize = true;
             this.lblPowerLineValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblPowerLineValue.ForeColor = System.Drawing.Color.White;
+            this.lblPowerLineValue.ForeColor = System.Drawing.SystemColors.Info;
             this.lblPowerLineValue.Location = new System.Drawing.Point(123, 15);
             this.lblPowerLineValue.Name = "lblPowerLineValue";
             this.lblPowerLineValue.Size = new System.Drawing.Size(31, 17);
@@ -76,29 +76,18 @@
             this.lblPowerLine.AutoSize = true;
             this.lblPowerLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblPowerLine.ForeColor = System.Drawing.Color.White;
-            this.lblPowerLine.Location = new System.Drawing.Point(40, 15);
+            this.lblPowerLine.Location = new System.Drawing.Point(44, 15);
             this.lblPowerLine.Name = "lblPowerLine";
             this.lblPowerLine.Size = new System.Drawing.Size(82, 17);
             this.lblPowerLine.TabIndex = 3;
             this.lblPowerLine.Text = "Power Line:";
             // 
-            // lblBatteryCharge
-            // 
-            this.lblBatteryCharge.AutoSize = true;
-            this.lblBatteryCharge.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblBatteryCharge.ForeColor = System.Drawing.Color.White;
-            this.lblBatteryCharge.Location = new System.Drawing.Point(15, 41);
-            this.lblBatteryCharge.Name = "lblBatteryCharge";
-            this.lblBatteryCharge.Size = new System.Drawing.Size(58, 17);
-            this.lblBatteryCharge.TabIndex = 4;
-            this.lblBatteryCharge.Text = "Charge:";
-            // 
             // lblBatteryChargeValue
             // 
             this.lblBatteryChargeValue.AutoSize = true;
             this.lblBatteryChargeValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblBatteryChargeValue.ForeColor = System.Drawing.Color.White;
-            this.lblBatteryChargeValue.Location = new System.Drawing.Point(74, 41);
+            this.lblBatteryChargeValue.ForeColor = System.Drawing.SystemColors.Info;
+            this.lblBatteryChargeValue.Location = new System.Drawing.Point(46, 41);
             this.lblBatteryChargeValue.Name = "lblBatteryChargeValue";
             this.lblBatteryChargeValue.Size = new System.Drawing.Size(31, 17);
             this.lblBatteryChargeValue.TabIndex = 5;
@@ -109,7 +98,7 @@
             this.lblBatteryLife.AutoSize = true;
             this.lblBatteryLife.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblBatteryLife.ForeColor = System.Drawing.Color.White;
-            this.lblBatteryLife.Location = new System.Drawing.Point(28, 69);
+            this.lblBatteryLife.Location = new System.Drawing.Point(33, 69);
             this.lblBatteryLife.Name = "lblBatteryLife";
             this.lblBatteryLife.Size = new System.Drawing.Size(94, 20);
             this.lblBatteryLife.TabIndex = 6;
@@ -153,7 +142,7 @@
             this.lblBatteryLifeRemaining.AutoSize = true;
             this.lblBatteryLifeRemaining.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblBatteryLifeRemaining.ForeColor = System.Drawing.Color.White;
-            this.lblBatteryLifeRemaining.Location = new System.Drawing.Point(43, 100);
+            this.lblBatteryLifeRemaining.Location = new System.Drawing.Point(47, 100);
             this.lblBatteryLifeRemaining.Name = "lblBatteryLifeRemaining";
             this.lblBatteryLifeRemaining.Size = new System.Drawing.Size(79, 17);
             this.lblBatteryLifeRemaining.TabIndex = 10;
@@ -163,7 +152,7 @@
             // 
             this.lblBatteryLifeRemainingValue.AutoSize = true;
             this.lblBatteryLifeRemainingValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblBatteryLifeRemainingValue.ForeColor = System.Drawing.Color.White;
+            this.lblBatteryLifeRemainingValue.ForeColor = System.Drawing.SystemColors.Info;
             this.lblBatteryLifeRemainingValue.Location = new System.Drawing.Point(123, 100);
             this.lblBatteryLifeRemainingValue.Name = "lblBatteryLifeRemainingValue";
             this.lblBatteryLifeRemainingValue.Size = new System.Drawing.Size(31, 17);
@@ -179,10 +168,10 @@
             // chbAutoStart
             // 
             this.chbAutoStart.AutoSize = true;
-            this.chbAutoStart.Location = new System.Drawing.Point(7, 74);
+            this.chbAutoStart.Location = new System.Drawing.Point(12, 43);
             this.chbAutoStart.Name = "chbAutoStart";
             this.chbAutoStart.Size = new System.Drawing.Size(15, 14);
-            this.chbAutoStart.TabIndex = 3;
+            this.chbAutoStart.TabIndex = 2;
             this.toolTip1.SetToolTip(this.chbAutoStart, "Start with Windows");
             this.chbAutoStart.UseVisualStyleBackColor = true;
             this.chbAutoStart.CheckedChanged += new System.EventHandler(this.chbAutoStart_CheckedChanged);
@@ -211,12 +200,26 @@
             this.lblRefreshRate.TabIndex = 12;
             this.lblRefreshRate.Text = "Refresh Rate: 1 min";
             // 
+            // btnSettings
+            // 
+            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettings.ForeColor = System.Drawing.Color.White;
+            this.btnSettings.Location = new System.Drawing.Point(6, 66);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(26, 23);
+            this.btnSettings.TabIndex = 3;
+            this.btnSettings.Text = "...";
+            this.toolTip1.SetToolTip(this.btnSettings, "Exit application");
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(284, 126);
+            this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.lblRefreshRate);
             this.Controls.Add(this.btnHide);
             this.Controls.Add(this.chbAutoStart);
@@ -227,7 +230,6 @@
             this.Controls.Add(this.lblBatteryLifeValue);
             this.Controls.Add(this.lblBatteryLife);
             this.Controls.Add(this.lblBatteryChargeValue);
-            this.Controls.Add(this.lblBatteryCharge);
             this.Controls.Add(this.lblPowerLine);
             this.Controls.Add(this.lblPowerLineValue);
             this.Controls.Add(this.btnClose);
@@ -252,7 +254,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblPowerLineValue;
         private System.Windows.Forms.Label lblPowerLine;
-        private System.Windows.Forms.Label lblBatteryCharge;
         private System.Windows.Forms.Label lblBatteryChargeValue;
         private System.Windows.Forms.Label lblBatteryLife;
         private System.Windows.Forms.Label lblBatteryLifeValue;
@@ -265,6 +266,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button btnHide;
         private System.Windows.Forms.Label lblRefreshRate;
+        private System.Windows.Forms.Button btnSettings;
     }
 }
 
