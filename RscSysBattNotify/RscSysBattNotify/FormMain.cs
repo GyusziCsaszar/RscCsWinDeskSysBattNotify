@@ -17,12 +17,6 @@ namespace RscSysBattNotify
     public partial class FormMain : Form
     {
 
-        public class BattLevel
-        {
-            public int iBattPerc;
-            public Color clFore;
-        }
-
         public const string csAPP_TITLE = "Rsc System Battery Notify v1.05";
         protected const string csAPP_NAME = "RscSysBattNotify";
 
@@ -31,7 +25,7 @@ namespace RscSysBattNotify
 
         private NotifyIcon m_notifyIcon = null;
 
-        private List<BattLevel> m_aBattLevels;
+        private FormGraph m_FormGraph = null;
         private Rectangle m_rcGraph;
         private bool m_bGraphClickStarted = false;
 
@@ -77,7 +71,6 @@ namespace RscSysBattNotify
 
             MessageBoxEx.DarkMode = true;
 
-            m_aBattLevels = new List<BattLevel>();
             m_rcGraph = new Rectangle(0, 0, 0, 0);
 
             //Hide Caption Bar
@@ -300,7 +293,7 @@ namespace RscSysBattNotify
             BattLevel bl = new BattLevel();
             bl.iBattPerc = iBattPerc;
             bl.clFore = lblBatteryLifeValue.ForeColor;
-            m_aBattLevels.Add(bl);
+            BatteryLevelStore.BatteryLevelList.Add(bl);
 
             int iBattPercTenths = iBattPerc / 10;
             if (m_iBatteryLifePercentPrevTenths != iBattPercTenths && m_iBatteryLifePercentPrevTenths > 0)
@@ -315,6 +308,7 @@ namespace RscSysBattNotify
             m_iBatteryLifePercentPrev = iBattPerc;
 
             if (Visible) Refresh();
+            if (m_FormGraph != null && m_FormGraph.Visible) m_FormGraph.Refresh();
 
             lblBatteryFullLifetimeValue.Text = GetPowerStatusValueAsString("BatteryFullLifetime");
             lblBatteryLifeRemainingValue.Text = GetPowerStatusValueAsString("BatteryLifeRemaining");
@@ -545,11 +539,11 @@ namespace RscSysBattNotify
                 m_aBattLevels.RemoveAt(0);
             }
             */
-            int iFrom = Math.Max(0, m_aBattLevels.Count - iMaxCnt);
+            int iFrom = Math.Max(0, BatteryLevelStore.BatteryLevelList.Count - iMaxCnt);
 
-            for (int i = iFrom; i < m_aBattLevels.Count; i++)
+            for (int i = iFrom; i < BatteryLevelStore.BatteryLevelList.Count; i++)
             {
-                if ((i == iFrom) || (m_aBattLevels[i - 1].clFore != m_aBattLevels[i].clFore))
+                if ((i == iFrom) || (BatteryLevelStore.BatteryLevelList[i - 1].clFore != BatteryLevelStore.BatteryLevelList[i].clFore))
                 {
                     if (pen != null)
                     {
@@ -557,12 +551,12 @@ namespace RscSysBattNotify
                         pen = null;
                     }
 
-                    pen = new Pen(m_aBattLevels[i].clFore);
+                    pen = new Pen(BatteryLevelStore.BatteryLevelList[i].clFore);
                 }
 
-                if (m_aBattLevels[i].iBattPerc > 0)
+                if (BatteryLevelStore.BatteryLevelList[i].iBattPerc > 0)
                 {
-                    e.Graphics.DrawLine(pen, ptBottomLeft.X + i, ptBottomLeft.Y - 1, ptBottomLeft.X + i, ptBottomLeft.Y - m_aBattLevels[i].iBattPerc);
+                    e.Graphics.DrawLine(pen, ptBottomLeft.X + (i - iFrom), ptBottomLeft.Y - 1, ptBottomLeft.X + (i - iFrom), ptBottomLeft.Y - BatteryLevelStore.BatteryLevelList[i].iBattPerc);
                 }
             }
 
@@ -597,8 +591,15 @@ namespace RscSysBattNotify
                     {
                         m_bGraphClickStarted = false;
 
-                        FormGraph frm = new FormGraph();
-                        DialogResult dr = frm.ShowDialog();
+                        try
+                        {
+                            m_FormGraph = new FormGraph();
+                            DialogResult dr = m_FormGraph.ShowDialog();
+                        }
+                        finally
+                        {
+                            m_FormGraph = null;
+                        }
 
                         m_sLogPath = StorageRegistry.Read("LogPath", "");
                         m_bDoLog = (System.IO.File.Exists(m_sLogPath)) && (StorageRegistry.Read("DoLog", 0) > 0);

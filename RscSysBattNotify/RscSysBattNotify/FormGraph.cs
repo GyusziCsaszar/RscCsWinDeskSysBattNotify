@@ -75,5 +75,74 @@ namespace RscSysBattNotify
                 DialogResult = DialogResult.OK;
             }
         }
+
+        private void FormGraph_Paint(object sender, PaintEventArgs e)
+        {
+
+            Pen pen;
+
+            Point ptBottomLeft = new Point();
+            ptBottomLeft.X = 15;
+            ptBottomLeft.Y = 112;
+
+            Point ptTopRight = new Point();
+            ptTopRight.X = ClientRectangle.Width - 15;
+            ptTopRight.Y = 10;
+
+            pen = new Pen(Color.Gray);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y, ptTopRight.X, ptBottomLeft.Y);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptTopRight.Y, ptTopRight.X, ptTopRight.Y);
+            pen.Dispose();
+            pen = null;
+
+            pen = new Pen(Color.DimGray);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 10, ptTopRight.X, ptBottomLeft.Y - 10);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 20, ptTopRight.X, ptBottomLeft.Y - 20);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 30, ptTopRight.X, ptBottomLeft.Y - 30);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 40, ptTopRight.X, ptBottomLeft.Y - 40);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 50, ptTopRight.X, ptBottomLeft.Y - 50);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 60, ptTopRight.X, ptBottomLeft.Y - 60);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 70, ptTopRight.X, ptBottomLeft.Y - 70);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 80, ptTopRight.X, ptBottomLeft.Y - 80);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 90, ptTopRight.X, ptBottomLeft.Y - 90);
+            pen.Dispose();
+            pen = null;
+
+            int iMaxCnt = (ptTopRight.X - ptBottomLeft.X) + 1;
+
+            // In FormGraph show all levels gathered...
+            /*
+            while (m_aBattLevels.Count > iMaxCnt)
+            {
+                m_aBattLevels.RemoveAt(0);
+            }
+            */
+            int iFrom = Math.Max(0, BatteryLevelStore.BatteryLevelList.Count - iMaxCnt);
+
+            for (int i = iFrom; i < BatteryLevelStore.BatteryLevelList.Count; i++)
+            {
+                if ((i == iFrom) || (BatteryLevelStore.BatteryLevelList[i - 1].clFore != BatteryLevelStore.BatteryLevelList[i].clFore))
+                {
+                    if (pen != null)
+                    {
+                        pen.Dispose();
+                        pen = null;
+                    }
+
+                    pen = new Pen(BatteryLevelStore.BatteryLevelList[i].clFore);
+                }
+
+                if (BatteryLevelStore.BatteryLevelList[i].iBattPerc > 0)
+                {
+                    e.Graphics.DrawLine(pen, ptBottomLeft.X + (i - iFrom), ptBottomLeft.Y - 1, ptBottomLeft.X + (i - iFrom), ptBottomLeft.Y - BatteryLevelStore.BatteryLevelList[i].iBattPerc);
+                }
+            }
+
+            if (pen != null)
+            {
+                pen.Dispose();
+                pen = null;
+            }
+        }
     }
 }

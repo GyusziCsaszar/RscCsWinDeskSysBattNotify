@@ -35,13 +35,14 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.chbDoLog = new System.Windows.Forms.CheckBox();
+            this.lblRefreshRate = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblLogPath
             // 
             this.lblLogPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblLogPath.AutoSize = true;
-            this.lblLogPath.Location = new System.Drawing.Point(13, 127);
+            this.lblLogPath.Location = new System.Drawing.Point(13, 148);
             this.lblLogPath.Name = "lblLogPath";
             this.lblLogPath.Size = new System.Drawing.Size(72, 13);
             this.lblLogPath.TabIndex = 0;
@@ -54,19 +55,19 @@
             this.tbLogPath.BackColor = System.Drawing.Color.Gainsboro;
             this.tbLogPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbLogPath.ForeColor = System.Drawing.Color.Black;
-            this.tbLogPath.Location = new System.Drawing.Point(91, 124);
+            this.tbLogPath.Location = new System.Drawing.Point(91, 145);
             this.tbLogPath.Name = "tbLogPath";
             this.tbLogPath.Size = new System.Drawing.Size(301, 20);
-            this.tbLogPath.TabIndex = 1;
+            this.tbLogPath.TabIndex = 2;
             // 
             // btnLogPath
             // 
             this.btnLogPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLogPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogPath.Location = new System.Drawing.Point(398, 121);
+            this.btnLogPath.Location = new System.Drawing.Point(398, 142);
             this.btnLogPath.Name = "btnLogPath";
             this.btnLogPath.Size = new System.Drawing.Size(27, 23);
-            this.btnLogPath.TabIndex = 2;
+            this.btnLogPath.TabIndex = 1;
             this.btnLogPath.Text = "...";
             this.btnLogPath.UseVisualStyleBackColor = true;
             this.btnLogPath.Click += new System.EventHandler(this.btnLogPath_Click);
@@ -75,10 +76,10 @@
             // 
             this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnApply.Location = new System.Drawing.Point(171, 169);
+            this.btnApply.Location = new System.Drawing.Point(171, 190);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
-            this.btnApply.TabIndex = 3;
+            this.btnApply.TabIndex = 4;
             this.btnApply.Text = "Apply";
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
@@ -87,10 +88,10 @@
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOk.Location = new System.Drawing.Point(261, 169);
+            this.btnOk.Location = new System.Drawing.Point(261, 190);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
-            this.btnOk.TabIndex = 4;
+            this.btnOk.TabIndex = 5;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
@@ -100,10 +101,10 @@
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(352, 169);
+            this.btnCancel.Location = new System.Drawing.Point(352, 190);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 5;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -111,19 +112,31 @@
             // 
             this.chbDoLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chbDoLog.AutoSize = true;
-            this.chbDoLog.Location = new System.Drawing.Point(16, 159);
+            this.chbDoLog.Location = new System.Drawing.Point(16, 180);
             this.chbDoLog.Name = "chbDoLog";
             this.chbDoLog.Size = new System.Drawing.Size(117, 17);
-            this.chbDoLog.TabIndex = 6;
+            this.chbDoLog.TabIndex = 3;
             this.chbDoLog.Text = "Log Battery Charge";
             this.chbDoLog.UseVisualStyleBackColor = true;
+            // 
+            // lblRefreshRate
+            // 
+            this.lblRefreshRate.AutoSize = true;
+            this.lblRefreshRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblRefreshRate.ForeColor = System.Drawing.Color.LightGray;
+            this.lblRefreshRate.Location = new System.Drawing.Point(179, 115);
+            this.lblRefreshRate.Name = "lblRefreshRate";
+            this.lblRefreshRate.Size = new System.Drawing.Size(87, 12);
+            this.lblRefreshRate.TabIndex = 13;
+            this.lblRefreshRate.Text = "Refresh Rate: 1 min";
             // 
             // FormGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(437, 204);
+            this.ClientSize = new System.Drawing.Size(437, 225);
+            this.Controls.Add(this.lblRefreshRate);
             this.Controls.Add(this.chbDoLog);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -139,6 +152,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
             this.TopMost = true;
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.FormGraph_Paint);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,5 +167,6 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.CheckBox chbDoLog;
+        private System.Windows.Forms.Label lblRefreshRate;
     }
 }

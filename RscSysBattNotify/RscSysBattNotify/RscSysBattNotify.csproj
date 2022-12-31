@@ -60,6 +60,7 @@
     <Compile Include="..\RscUtilsCs\StorageRegistry.cs">
       <Link>StorageRegistry.cs</Link>
     </Compile>
+    <Compile Include="BatteryLevelStore.cs" />
     <Compile Include="FormGraph.cs">
       <SubType>Form</SubType>
     </Compile>
