@@ -468,6 +468,19 @@ namespace RscSysBattNotify
             pen.Dispose();
             pen = null;
 
+            pen = new Pen(Color.DimGray);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 10, ptTopRight.X, ptBottomLeft.Y - 10);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 20, ptTopRight.X, ptBottomLeft.Y - 20);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 30, ptTopRight.X, ptBottomLeft.Y - 30);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 40, ptTopRight.X, ptBottomLeft.Y - 40);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 50, ptTopRight.X, ptBottomLeft.Y - 50);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 60, ptTopRight.X, ptBottomLeft.Y - 60);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 70, ptTopRight.X, ptBottomLeft.Y - 70);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 80, ptTopRight.X, ptBottomLeft.Y - 80);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y - 90, ptTopRight.X, ptBottomLeft.Y - 90);
+            pen.Dispose();
+            pen = null;
+
             int iMaxCnt = (ptTopRight.X - ptBottomLeft.X) + 1;
 
             while (m_aBattLevels.Count > iMaxCnt)
