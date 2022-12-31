@@ -36,13 +36,21 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.chbDoLog = new System.Windows.Forms.CheckBox();
             this.lblRefreshRate = new System.Windows.Forms.Label();
+            this.lblRanges = new System.Windows.Forms.Label();
+            this.tbRangeEmpty = new System.Windows.Forms.TextBox();
+            this.pnlLow = new System.Windows.Forms.Panel();
+            this.tbRangeLow = new System.Windows.Forms.TextBox();
+            this.tbRangeNormal = new System.Windows.Forms.TextBox();
+            this.pnlMid = new System.Windows.Forms.Panel();
+            this.tbRangeHigh = new System.Windows.Forms.TextBox();
+            this.pnlHigh = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // lblLogPath
             // 
             this.lblLogPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblLogPath.AutoSize = true;
-            this.lblLogPath.Location = new System.Drawing.Point(13, 148);
+            this.lblLogPath.Location = new System.Drawing.Point(13, 184);
             this.lblLogPath.Name = "lblLogPath";
             this.lblLogPath.Size = new System.Drawing.Size(72, 13);
             this.lblLogPath.TabIndex = 0;
@@ -55,7 +63,7 @@
             this.tbLogPath.BackColor = System.Drawing.Color.Gainsboro;
             this.tbLogPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbLogPath.ForeColor = System.Drawing.Color.Black;
-            this.tbLogPath.Location = new System.Drawing.Point(91, 145);
+            this.tbLogPath.Location = new System.Drawing.Point(91, 181);
             this.tbLogPath.Name = "tbLogPath";
             this.tbLogPath.Size = new System.Drawing.Size(301, 20);
             this.tbLogPath.TabIndex = 2;
@@ -64,7 +72,7 @@
             // 
             this.btnLogPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLogPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogPath.Location = new System.Drawing.Point(398, 142);
+            this.btnLogPath.Location = new System.Drawing.Point(398, 178);
             this.btnLogPath.Name = "btnLogPath";
             this.btnLogPath.Size = new System.Drawing.Size(27, 23);
             this.btnLogPath.TabIndex = 1;
@@ -76,7 +84,7 @@
             // 
             this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnApply.Location = new System.Drawing.Point(171, 190);
+            this.btnApply.Location = new System.Drawing.Point(171, 226);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
             this.btnApply.TabIndex = 4;
@@ -88,7 +96,7 @@
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOk.Location = new System.Drawing.Point(261, 190);
+            this.btnOk.Location = new System.Drawing.Point(261, 226);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 5;
@@ -101,7 +109,7 @@
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(352, 190);
+            this.btnCancel.Location = new System.Drawing.Point(352, 226);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
@@ -112,7 +120,7 @@
             // 
             this.chbDoLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chbDoLog.AutoSize = true;
-            this.chbDoLog.Location = new System.Drawing.Point(16, 180);
+            this.chbDoLog.Location = new System.Drawing.Point(16, 216);
             this.chbDoLog.Name = "chbDoLog";
             this.chbDoLog.Size = new System.Drawing.Size(117, 17);
             this.chbDoLog.TabIndex = 3;
@@ -130,12 +138,107 @@
             this.lblRefreshRate.TabIndex = 13;
             this.lblRefreshRate.Text = "Refresh Rate: 1 min";
             // 
+            // lblRanges
+            // 
+            this.lblRanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblRanges.AutoSize = true;
+            this.lblRanges.Location = new System.Drawing.Point(13, 147);
+            this.lblRanges.Name = "lblRanges";
+            this.lblRanges.Size = new System.Drawing.Size(64, 13);
+            this.lblRanges.TabIndex = 14;
+            this.lblRanges.Text = "Ranges (%):";
+            // 
+            // tbRangeEmpty
+            // 
+            this.tbRangeEmpty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbRangeEmpty.BackColor = System.Drawing.Color.Gainsboro;
+            this.tbRangeEmpty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbRangeEmpty.Location = new System.Drawing.Point(88, 145);
+            this.tbRangeEmpty.Name = "tbRangeEmpty";
+            this.tbRangeEmpty.ReadOnly = true;
+            this.tbRangeEmpty.Size = new System.Drawing.Size(37, 20);
+            this.tbRangeEmpty.TabIndex = 15;
+            this.tbRangeEmpty.Text = "0";
+            this.tbRangeEmpty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // pnlLow
+            // 
+            this.pnlLow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlLow.BackColor = System.Drawing.Color.Red;
+            this.pnlLow.Location = new System.Drawing.Point(131, 148);
+            this.pnlLow.Name = "pnlLow";
+            this.pnlLow.Size = new System.Drawing.Size(25, 12);
+            this.pnlLow.TabIndex = 16;
+            // 
+            // tbRangeLow
+            // 
+            this.tbRangeLow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbRangeLow.BackColor = System.Drawing.Color.Gainsboro;
+            this.tbRangeLow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbRangeLow.Location = new System.Drawing.Point(162, 145);
+            this.tbRangeLow.Name = "tbRangeLow";
+            this.tbRangeLow.Size = new System.Drawing.Size(37, 20);
+            this.tbRangeLow.TabIndex = 17;
+            this.tbRangeLow.Text = "10";
+            this.tbRangeLow.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tbRangeNormal
+            // 
+            this.tbRangeNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbRangeNormal.BackColor = System.Drawing.Color.Gainsboro;
+            this.tbRangeNormal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbRangeNormal.Location = new System.Drawing.Point(238, 145);
+            this.tbRangeNormal.Name = "tbRangeNormal";
+            this.tbRangeNormal.Size = new System.Drawing.Size(37, 20);
+            this.tbRangeNormal.TabIndex = 19;
+            this.tbRangeNormal.Text = "90";
+            this.tbRangeNormal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // pnlMid
+            // 
+            this.pnlMid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlMid.BackColor = System.Drawing.Color.Orange;
+            this.pnlMid.Location = new System.Drawing.Point(207, 148);
+            this.pnlMid.Name = "pnlMid";
+            this.pnlMid.Size = new System.Drawing.Size(25, 12);
+            this.pnlMid.TabIndex = 18;
+            // 
+            // tbRangeHigh
+            // 
+            this.tbRangeHigh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbRangeHigh.BackColor = System.Drawing.Color.Gainsboro;
+            this.tbRangeHigh.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbRangeHigh.Location = new System.Drawing.Point(313, 145);
+            this.tbRangeHigh.Name = "tbRangeHigh";
+            this.tbRangeHigh.ReadOnly = true;
+            this.tbRangeHigh.Size = new System.Drawing.Size(37, 20);
+            this.tbRangeHigh.TabIndex = 21;
+            this.tbRangeHigh.Text = "100";
+            this.tbRangeHigh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // pnlHigh
+            // 
+            this.pnlHigh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlHigh.BackColor = System.Drawing.Color.LimeGreen;
+            this.pnlHigh.Location = new System.Drawing.Point(282, 148);
+            this.pnlHigh.Name = "pnlHigh";
+            this.pnlHigh.Size = new System.Drawing.Size(25, 12);
+            this.pnlHigh.TabIndex = 20;
+            // 
             // FormGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(437, 225);
+            this.ClientSize = new System.Drawing.Size(437, 261);
+            this.Controls.Add(this.tbRangeHigh);
+            this.Controls.Add(this.pnlHigh);
+            this.Controls.Add(this.tbRangeNormal);
+            this.Controls.Add(this.pnlMid);
+            this.Controls.Add(this.tbRangeLow);
+            this.Controls.Add(this.pnlLow);
+            this.Controls.Add(this.tbRangeEmpty);
+            this.Controls.Add(this.lblRanges);
             this.Controls.Add(this.lblRefreshRate);
             this.Controls.Add(this.chbDoLog);
             this.Controls.Add(this.btnCancel);
@@ -168,5 +271,13 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.CheckBox chbDoLog;
         private System.Windows.Forms.Label lblRefreshRate;
+        private System.Windows.Forms.Label lblRanges;
+        private System.Windows.Forms.TextBox tbRangeEmpty;
+        private System.Windows.Forms.Panel pnlLow;
+        private System.Windows.Forms.TextBox tbRangeLow;
+        private System.Windows.Forms.TextBox tbRangeNormal;
+        private System.Windows.Forms.Panel pnlMid;
+        private System.Windows.Forms.TextBox tbRangeHigh;
+        private System.Windows.Forms.Panel pnlHigh;
     }
 }

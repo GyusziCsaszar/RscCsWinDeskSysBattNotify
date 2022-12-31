@@ -20,6 +20,9 @@ namespace RscSysBattNotify
             tbLogPath.Text = StorageRegistry.Read("LogPath", "");
 
             chbDoLog.Checked = (StorageRegistry.Read("DoLog", 0) > 0);
+
+            tbRangeLow.Text = StorageRegistry.Read("RangeLow", 10).ToString();
+            tbRangeNormal.Text = StorageRegistry.Read("RangeNormal", 90).ToString();
         }
 
         private void btnLogPath_Click(object sender, EventArgs e)
@@ -61,9 +64,35 @@ namespace RscSysBattNotify
                 }
             }
 
+            int iRangeLow;
+            if (!int.TryParse(tbRangeLow.Text, out iRangeLow))
+            {
+                tbRangeLow.Focus();
+                MessageBoxEx.Show("Number between 0 and 100 is required!", FormMain.csAPP_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error, true /*bTopMost*/);
+                return false;
+            }
+
+            int iRangeNormal;
+            if (!int.TryParse(tbRangeNormal.Text, out iRangeNormal))
+            {
+                tbRangeNormal.Focus();
+                MessageBoxEx.Show("Number between 0 and 100 is required!", FormMain.csAPP_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error, true /*bTopMost*/);
+                return false;
+            }
+
+            if (iRangeLow < 0 || iRangeLow > iRangeNormal || iRangeNormal > 100)
+            {
+                MessageBoxEx.Show("Range low has to be less or equal to range normal and between 0 and 100!", FormMain.csAPP_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error, true /*bTopMost*/);
+                return false;
+            }
+
             StorageRegistry.Write("LogPath", tbLogPath.Text);
 
             StorageRegistry.Write("DoLog", chbDoLog.Checked ? 1 : 0);
+
+            StorageRegistry.Write("RangeLow", iRangeLow);
+
+            StorageRegistry.Write("RangeNormal", iRangeNormal);
 
             return true;
         }

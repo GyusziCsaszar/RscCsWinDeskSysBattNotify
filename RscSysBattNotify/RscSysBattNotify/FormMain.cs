@@ -19,7 +19,7 @@ namespace RscSysBattNotify
     public partial class FormMain : Form
     {
 
-        public const string csAPP_TITLE = "Rsc System Battery Notify v2.00";
+        public const string csAPP_TITLE = "Rsc System Battery Notify v2.01";
         protected const string csAPP_NAME = "RscSysBattNotify";
 
         private int m_iBatteryLifePercentPrev = -1;
@@ -33,6 +33,8 @@ namespace RscSysBattNotify
 
         private bool m_bDoLog;
         private string m_sLogPath;
+        private int m_iRangeLow;
+        private int m_iRangeNormal;
 
         // SRC: https://stackoverflow.com/questions/12026664/a-generic-error-occurred-in-gdi-when-calling-bitmap-gethicon
         [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = CharSet.Auto)]
@@ -70,6 +72,8 @@ namespace RscSysBattNotify
 
             m_sLogPath = StorageRegistry.Read("LogPath", "");
             m_bDoLog = (System.IO.File.Exists(m_sLogPath)) && (StorageRegistry.Read("DoLog", 0) > 0);
+            m_iRangeLow = StorageRegistry.Read("RangeLow", 10);
+            m_iRangeNormal = StorageRegistry.Read("RangeNormal", 90);
 
             MessageBoxEx.DarkMode = true;
 
@@ -275,15 +279,15 @@ namespace RscSysBattNotify
             {
                 iBattPerc = Int32.Parse(lblBatteryLifeValue.Text.Substring(0, 2).Trim());
             }
-            if (iBattPerc >= 90)
+            if (iBattPerc >= m_iRangeNormal)
             {
                 lblBatteryLifeValue.ForeColor = Color.Green;
             }
-            else if (iBattPerc <= 10)
+            else if (iBattPerc <= m_iRangeLow)
             {
                 lblBatteryLifeValue.ForeColor = Color.Red;
             }
-            else if (iBattPerc <= 20)
+            else if (iBattPerc <= (m_iRangeLow + 10))
             {
                 lblBatteryLifeValue.ForeColor = Color.OrangeRed;
             }
@@ -615,6 +619,8 @@ namespace RscSysBattNotify
 
             m_sLogPath = StorageRegistry.Read("LogPath", "");
             m_bDoLog = (System.IO.File.Exists(m_sLogPath)) && (StorageRegistry.Read("DoLog", 0) > 0);
+            m_iRangeLow = StorageRegistry.Read("RangeLow", 10);
+            m_iRangeNormal = StorageRegistry.Read("RangeNormal", 90);
         }
 
         private void ShowSystemBatteryReport()
