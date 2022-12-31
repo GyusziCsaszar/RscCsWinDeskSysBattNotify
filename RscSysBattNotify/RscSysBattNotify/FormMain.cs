@@ -17,7 +17,7 @@ namespace RscSysBattNotify
     public partial class FormMain : Form
     {
 
-        protected const string csAPP_TITLE = "Rsc System Battery Notify v1.01";
+        protected const string csAPP_TITLE = "Rsc System Battery Notify v1.02";
         protected const string csAPP_NAME = "RscSysBattNotify";
 
         private int m_iBatteryLifePercentPrev = -1;
@@ -296,7 +296,13 @@ namespace RscSysBattNotify
 
         private void tmrRefresh_Tick(object sender, EventArgs e)
         {
+            tmrRefresh.Enabled = false;
+
             RefreshPowerStatus();
+
+            RefreshNotifyIcon();
+
+            tmrRefresh.Enabled = true;
         }
 
         private void chbAutoStart_CheckedChanged(object sender, EventArgs e)
