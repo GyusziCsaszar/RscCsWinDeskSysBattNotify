@@ -19,7 +19,7 @@ namespace RscSysBattNotify
     public partial class FormMain : Form
     {
 
-        public const string csAPP_TITLE = "Rsc System Battery Notify v1.17";
+        public const string csAPP_TITLE = "Rsc System Battery Notify v2.00";
         protected const string csAPP_NAME = "RscSysBattNotify";
 
         private int m_iBatteryLifePercentPrev = -1;
@@ -456,7 +456,8 @@ namespace RscSysBattNotify
                 registryKey.DeleteValue(csAPP_NAME);
             }
 
-            registryKey.Dispose();
+            //registryKey.Dispose();
+            ((IDisposable)registryKey).Dispose();
         }
 
         public bool IsAppStartWithWindowsOn()
@@ -618,78 +619,28 @@ namespace RscSysBattNotify
 
         private void ShowSystemBatteryReport()
         {
+            ProcessStartInfo psi = new ProcessStartInfo();
 
-            //uint uiExitCode = UtilWinApi.CreateProcess_WAIT(Environment.SystemDirectory + "\\powercfg.exe", Environment.SystemDirectory /*sCurrentDirectory*/, "/batteryreport" /*sParameters*/, sb, false /*bVisible*/);
+            psi.UseShellExecute = true; // false;
+            psi.Verb = "runas";
+            psi.CreateNoWindow = true;
+            psi.WindowStyle = ProcessWindowStyle.Hidden;
 
-            // SRC: https://stackoverflow.com/questions/2532769/how-to-start-a-process-as-administrator-mode-in-c-sharp
+            psi.WorkingDirectory = Environment.SystemDirectory;
 
-            /*
-            Process p = new Process();
-            p.StartInfo.FileName = Environment.SystemDirectory + "\\powercfg.exe";
-            p.StartInfo.Arguments = "/batteryreport";
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.CreateNoWindow = true;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.Verb = "runas";
-            p.Start();
-            p.WaitForExit();
-            */
+            psi.FileName = Environment.SystemDirectory + "\\powercfg.exe";
+            psi.Arguments = "/batteryreport"; // /output \"C:\\TEST\\battery_report.html\"";
 
-            /*
-            Process p = new Process();
-            p.StartInfo.FileName = Environment.SystemDirectory + "\\powercfg.exe";
-            p.StartInfo.Arguments = "/batteryreport";
-            p.StartInfo.UseShellExecute = true;
-            p.StartInfo.Verb = "runas";
-            p.Start();
-            p.WaitForExit();
-            */
-
-            /*
-            var psi = new ProcessStartInfo
+            try
             {
-                FileName = "notepad",
-                //UserName = Environment.UserName,
-                //Domain = "",
-                //Password = pass,
-                UseShellExecute = true,
-                //RedirectStandardOutput = true,
-                //RedirectStandardError = true
-            };
-            Process p = Process.Start(psi);
-            p.WaitForExit();
-            */
+                Process p = Process.Start(psi);
 
-            /*
-            Process p = new Process();
-            p.StartInfo.FileName = Environment.SystemDirectory + "\\powercfg.exe";
-            p.StartInfo.Arguments = "/batteryreport";
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.CreateNoWindow = true;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.Verb = "runas";
-            p.Start();
-            p.WaitForExit();
-            */
+                p.WaitForExit();
 
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.UseShellExecute = true;
-            startInfo.WorkingDirectory = Environment.SystemDirectory;
-            startInfo.FileName = Environment.SystemDirectory + "\\cmd.exe";
-            startInfo.Verb = "runas";
-            startInfo.Arguments = "/C \"" + Environment.SystemDirectory + "\\powercfg.exe /batteryreport\"";
-            startInfo.ErrorDialog = true;
-            Process p = Process.Start(startInfo);
-            p.WaitForExit();
-
-            string sOutput = ""; //p.StandardOutput.ReadToEnd();
-
-            if (p.ExitCode == 0)
-            {
-                string sHtmlFile = Environment.SystemDirectory + "\\battery-report.html";
-
-                if (System.IO.File.Exists(sHtmlFile))
+                if (p.ExitCode == 0)
                 {
+                    string sHtmlFile = Environment.SystemDirectory + "\\battery-report.html";
+
                     Process p2 = new Process();
                     p2.StartInfo.FileName = sHtmlFile;
                     p2.StartInfo.UseShellExecute = true;
@@ -698,15 +649,13 @@ namespace RscSysBattNotify
                 }
                 else
                 {
-                    MessageBoxEx.Show("Expected output file (" + sHtmlFile + ") does not exist!\r\n\r\nOutput:\r\n\r\n" + sOutput, csAPP_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error, true /*bTopMost*/);
+                    MessageBoxEx.Show("Something went wrong!\r\n\r\nProcess Exit Code: " + p.ExitCode.ToString() + "\r\n(" + Environment.SystemDirectory + "\\powercfg.exe" + ")", csAPP_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error, true /*bTopMost*/);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBoxEx.Show("Something went wrong!\r\n\r\nProcess Exit Code: " + p.ExitCode.ToString() + "\r\n(" + Environment.SystemDirectory + "\\powercfg.exe" + ")\r\n\r\nOutput:\r\n\r\n" + sOutput, csAPP_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error, true /*bTopMost*/);
+                MessageBoxEx.Show("Something went wrong!\r\n\r\nError: " + ex.Message, csAPP_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error, true /*bTopMost*/);
             }
-
-
         }
     }
 }

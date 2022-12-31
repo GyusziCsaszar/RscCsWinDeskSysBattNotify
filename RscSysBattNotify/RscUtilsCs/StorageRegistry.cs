@@ -18,21 +18,27 @@ namespace Ressive.Utils
         {
             RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\" + csCOMPANY + "\\" + m_sAppName);
             key.SetValue(sName, sValue);
-            key.Dispose();
+
+            //key.Dispose();
+            ((IDisposable)key).Dispose();
         }
 
         public static void Write(string sName, int iValue)
         {
             RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\" + csCOMPANY + "\\" + m_sAppName);
             key.SetValue(sName, iValue);
-            key.Dispose();
+
+            //key.Dispose();
+            ((IDisposable)key).Dispose();
         }
 
         public static string Read(string sName, string sDefaultValue)
         {
             RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\" + csCOMPANY + "\\" + m_sAppName);
             string sValue = (string)key.GetValue(sName, sDefaultValue);
-            key.Dispose();
+
+            //key.Dispose();
+            ((IDisposable)key).Dispose();
 
             return sValue;
         }
@@ -41,7 +47,9 @@ namespace Ressive.Utils
         {
             RegistryKey key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\" + csCOMPANY + "\\" + m_sAppName);
             int iValue = (int)key.GetValue(sName, iDefaultValue);
-            key.Dispose();
+
+            //key.Dispose();
+            ((IDisposable)key).Dispose();
 
             return iValue;
         }
