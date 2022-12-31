@@ -53,7 +53,7 @@
             this.btnClose.Location = new System.Drawing.Point(247, 12);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(26, 23);
-            this.btnClose.TabIndex = 13;
+            this.btnClose.TabIndex = 2;
             this.btnClose.Text = "X";
             this.toolTip1.SetToolTip(this.btnClose, "Exit application");
             this.btnClose.UseVisualStyleBackColor = true;
@@ -181,7 +181,7 @@
             this.chbAutoStart.Location = new System.Drawing.Point(258, 103);
             this.chbAutoStart.Name = "chbAutoStart";
             this.chbAutoStart.Size = new System.Drawing.Size(15, 14);
-            this.chbAutoStart.TabIndex = 12;
+            this.chbAutoStart.TabIndex = 3;
             this.toolTip1.SetToolTip(this.chbAutoStart, "Start with Windows");
             this.chbAutoStart.UseVisualStyleBackColor = true;
             this.chbAutoStart.CheckedChanged += new System.EventHandler(this.chbAutoStart_CheckedChanged);
