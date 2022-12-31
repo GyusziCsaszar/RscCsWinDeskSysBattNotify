@@ -91,7 +91,7 @@ namespace RscSysBattNotify
             {
                 try
                 {
-                    System.IO.File.AppendAllText(m_sLogPath, "\r\n"); //Mark App Start...
+                    System.IO.File.AppendAllText(m_sLogPath, "YYYY;MM;DD;hh;mm;ss;fff;ppp\r\n"); //Mark App Start...
                 }
                 catch (Exception exc)
                 {
@@ -320,7 +320,7 @@ namespace RscSysBattNotify
                 {
                     DateTime dt = DateTime.Now;
 
-                    string sLn = dt.ToShortDateString() + "; " + dt.ToShortTimeString() + "; " + dt.Millisecond.ToString() + "; " + iBattPerc.ToString() + " %\r\n";
+                    string sLn = String.Format("{0:D4};{1:D2};{2:D2};{3:D2};{4:D2};{5:D2};{6:D3};{7:D3}\r\n", dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond, iBattPerc);
 
                     System.IO.File.AppendAllText(m_sLogPath, sLn);
                 }
