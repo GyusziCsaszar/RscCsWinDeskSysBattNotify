@@ -17,7 +17,7 @@ namespace RscSysBattNotify
     public partial class FormMain : Form
     {
 
-        protected const string csAPP_TITLE = "Rsc System Battery Notify v1.03";
+        protected const string csAPP_TITLE = "Rsc System Battery Notify v1.04";
         protected const string csAPP_NAME = "RscSysBattNotify";
 
         private int m_iBatteryLifePercentPrev = -1;
@@ -38,15 +38,20 @@ namespace RscSysBattNotify
             //Hide Caption Bar
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 
-            Rectangle rect = Screen.FromControl(this).WorkingArea; // Bounds;
-            this.Left = rect.Left + (rect.Width - (this.Width + 5));
-            this.Top = rect.Top + (rect.Height - (this.Height + 5));
+            PlaceWindow();
 
             chbAutoStart.Checked = IsAppStartWithWindowsOn();
 
             RefreshPowerStatus();
 
             RefreshNotifyIcon();
+        }
+
+        private void PlaceWindow()
+        {
+            Rectangle rect = Screen.FromControl(this).WorkingArea; // Bounds;
+            this.Left = rect.Left + (rect.Width - (this.Width + 5));
+            this.Top = rect.Top + (rect.Height - (this.Height + 5));
         }
 
         private void NotifyIcon_Click(object sender, EventArgs e)
@@ -57,6 +62,12 @@ namespace RscSysBattNotify
             }
             else
             {
+                PlaceWindow();
+
+                RefreshPowerStatus();
+
+                RefreshNotifyIcon();
+
                 this.Visible = true;
             }
         }
