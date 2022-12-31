@@ -29,6 +29,29 @@ namespace RscSysBattNotify
         [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = CharSet.Auto)]
         extern static bool DestroyIcon(IntPtr handle);
 
+        // SRC: https://stackoverflow.com/questions/156046/show-a-form-without-stealing-focus
+        private const int SW_SHOWNOACTIVATE = 4;
+        private const int HWND_TOPMOST = -1;
+        private const uint SWP_NOACTIVATE = 0x0010;
+        [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
+        static extern bool SetWindowPos(
+             int hWnd,             // Window handle
+             int hWndInsertAfter,  // Placement-order handle
+             int X,                // Horizontal position
+             int Y,                // Vertical position
+             int cx,               // Width
+             int cy,               // Height
+             uint uFlags);         // Window positioning flags
+        [DllImport("user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+        static void ShowInactiveTopmost(Form frm)
+        {
+            ShowWindow(frm.Handle, SW_SHOWNOACTIVATE);
+            SetWindowPos(frm.Handle.ToInt32(), HWND_TOPMOST,
+            frm.Left, frm.Top, frm.Width, frm.Height,
+            SWP_NOACTIVATE);
+        }
+
         public FormMain()
         {
             InitializeComponent();
@@ -68,7 +91,8 @@ namespace RscSysBattNotify
 
                 RefreshNotifyIcon();
 
-                this.Visible = true;
+                //this.Visible = true;
+                ShowInactiveTopmost(this);
             }
         }
 
@@ -227,7 +251,11 @@ namespace RscSysBattNotify
             int iBattPercTenths = iBattPerc / 10;
             if (m_iBatteryLifePercentPrevTenths != iBattPercTenths && m_iBatteryLifePercentPrevTenths > 0)
             {
-                if (!Visible) Visible = true;
+                if (!Visible)
+                {
+                    //Visible = true;
+                    ShowInactiveTopmost(this);
+                }
             }
             m_iBatteryLifePercentPrevTenths = iBattPercTenths;
             m_iBatteryLifePercentPrev = iBattPerc;
