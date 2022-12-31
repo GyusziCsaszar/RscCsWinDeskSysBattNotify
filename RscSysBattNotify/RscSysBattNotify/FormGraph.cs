@@ -51,7 +51,7 @@ namespace RscSysBattNotify
                 {
                     try
                     {
-                        System.IO.File.WriteAllText(tbLogPath.Text, "");
+                        System.IO.File.AppendAllText(tbLogPath.Text, "YYYY;MM;DD;hh;mm;ss;fff;ppp;s\r\n");
                     }
                     catch (Exception exc)
                     {

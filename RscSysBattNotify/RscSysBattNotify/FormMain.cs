@@ -91,7 +91,7 @@ namespace RscSysBattNotify
             {
                 try
                 {
-                    System.IO.File.AppendAllText(m_sLogPath, "YYYY;MM;DD;hh;mm;ss;fff;ppp\r\n"); //Mark App Start...
+                    System.IO.File.AppendAllText(m_sLogPath, "0000;00;00;00;00;00;000;000;?\r\n"); //Mark App Start...
                 }
                 catch (Exception exc)
                 {
@@ -267,7 +267,12 @@ namespace RscSysBattNotify
         private void RefreshPowerStatus()
         {
             lblPowerLineValue.Text = GetPowerStatusValueAsString("PowerLineStatus");
+
             lblBatteryChargeValue.Text = GetPowerStatusValueAsString("BatteryChargeStatus");
+
+            string sChrg = "C";
+            if (lblBatteryChargeValue.Text == "Discharging" || lblBatteryChargeValue.Text == "High" || lblBatteryChargeValue.Text == "Low")
+                sChrg = "D";
 
             lblBatteryLifeValue.Text = GetPowerStatusValueAsString("BatteryLifePercent");
             int iBattPerc = 0;
@@ -320,7 +325,7 @@ namespace RscSysBattNotify
                 {
                     DateTime dt = DateTime.Now;
 
-                    string sLn = String.Format("{0:D4};{1:D2};{2:D2};{3:D2};{4:D2};{5:D2};{6:D3};{7:D3}\r\n", dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond, iBattPerc);
+                    string sLn = String.Format("{0:D4};{1:D2};{2:D2};{3:D2};{4:D2};{5:D2};{6:D3};{7:D3};" + sChrg + "\r\n", dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond, iBattPerc);
 
                     System.IO.File.AppendAllText(m_sLogPath, sLn);
                 }
@@ -544,7 +549,7 @@ namespace RscSysBattNotify
 
             for (int i = iFrom; i < m_aBattLevels.Count; i++)
             {
-                if ((i == 0) || (m_aBattLevels[i - 1].clFore != m_aBattLevels[i].clFore))
+                if ((i == iFrom) || (m_aBattLevels[i - 1].clFore != m_aBattLevels[i].clFore))
                 {
                     if (pen != null)
                     {
