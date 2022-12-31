@@ -50,7 +50,7 @@
             // 
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(247, 12);
+            this.btnClose.Location = new System.Drawing.Point(6, 97);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(26, 23);
             this.btnClose.TabIndex = 2;
@@ -64,7 +64,7 @@
             this.lblPowerLineValue.AutoSize = true;
             this.lblPowerLineValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblPowerLineValue.ForeColor = System.Drawing.Color.White;
-            this.lblPowerLineValue.Location = new System.Drawing.Point(170, 15);
+            this.lblPowerLineValue.Location = new System.Drawing.Point(123, 15);
             this.lblPowerLineValue.Name = "lblPowerLineValue";
             this.lblPowerLineValue.Size = new System.Drawing.Size(31, 17);
             this.lblPowerLineValue.TabIndex = 2;
@@ -75,7 +75,7 @@
             this.lblPowerLine.AutoSize = true;
             this.lblPowerLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblPowerLine.ForeColor = System.Drawing.Color.White;
-            this.lblPowerLine.Location = new System.Drawing.Point(82, 15);
+            this.lblPowerLine.Location = new System.Drawing.Point(40, 15);
             this.lblPowerLine.Name = "lblPowerLine";
             this.lblPowerLine.Size = new System.Drawing.Size(82, 17);
             this.lblPowerLine.TabIndex = 3;
@@ -86,18 +86,18 @@
             this.lblBatteryCharge.AutoSize = true;
             this.lblBatteryCharge.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblBatteryCharge.ForeColor = System.Drawing.Color.White;
-            this.lblBatteryCharge.Location = new System.Drawing.Point(57, 41);
+            this.lblBatteryCharge.Location = new System.Drawing.Point(24, 41);
             this.lblBatteryCharge.Name = "lblBatteryCharge";
-            this.lblBatteryCharge.Size = new System.Drawing.Size(107, 17);
+            this.lblBatteryCharge.Size = new System.Drawing.Size(58, 17);
             this.lblBatteryCharge.TabIndex = 4;
-            this.lblBatteryCharge.Text = "Battery Charge:";
+            this.lblBatteryCharge.Text = "Charge:";
             // 
             // lblBatteryChargeValue
             // 
             this.lblBatteryChargeValue.AutoSize = true;
             this.lblBatteryChargeValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblBatteryChargeValue.ForeColor = System.Drawing.Color.White;
-            this.lblBatteryChargeValue.Location = new System.Drawing.Point(170, 41);
+            this.lblBatteryChargeValue.Location = new System.Drawing.Point(83, 41);
             this.lblBatteryChargeValue.Name = "lblBatteryChargeValue";
             this.lblBatteryChargeValue.Size = new System.Drawing.Size(31, 17);
             this.lblBatteryChargeValue.TabIndex = 5;
@@ -108,7 +108,7 @@
             this.lblBatteryLife.AutoSize = true;
             this.lblBatteryLife.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblBatteryLife.ForeColor = System.Drawing.Color.White;
-            this.lblBatteryLife.Location = new System.Drawing.Point(70, 69);
+            this.lblBatteryLife.Location = new System.Drawing.Point(28, 69);
             this.lblBatteryLife.Name = "lblBatteryLife";
             this.lblBatteryLife.Size = new System.Drawing.Size(94, 20);
             this.lblBatteryLife.TabIndex = 6;
@@ -119,7 +119,7 @@
             this.lblBatteryLifeValue.AutoSize = true;
             this.lblBatteryLifeValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblBatteryLifeValue.ForeColor = System.Drawing.Color.White;
-            this.lblBatteryLifeValue.Location = new System.Drawing.Point(169, 69);
+            this.lblBatteryLifeValue.Location = new System.Drawing.Point(122, 69);
             this.lblBatteryLifeValue.Name = "lblBatteryLifeValue";
             this.lblBatteryLifeValue.Size = new System.Drawing.Size(38, 20);
             this.lblBatteryLifeValue.TabIndex = 7;
@@ -152,18 +152,18 @@
             this.lblBatteryLifeRemaining.AutoSize = true;
             this.lblBatteryLifeRemaining.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblBatteryLifeRemaining.ForeColor = System.Drawing.Color.White;
-            this.lblBatteryLifeRemaining.Location = new System.Drawing.Point(9, 100);
+            this.lblBatteryLifeRemaining.Location = new System.Drawing.Point(43, 100);
             this.lblBatteryLifeRemaining.Name = "lblBatteryLifeRemaining";
-            this.lblBatteryLifeRemaining.Size = new System.Drawing.Size(155, 17);
+            this.lblBatteryLifeRemaining.Size = new System.Drawing.Size(79, 17);
             this.lblBatteryLifeRemaining.TabIndex = 10;
-            this.lblBatteryLifeRemaining.Text = "Battery Life Remaining:";
+            this.lblBatteryLifeRemaining.Text = "Remaining:";
             // 
             // lblBatteryLifeRemainingValue
             // 
             this.lblBatteryLifeRemainingValue.AutoSize = true;
             this.lblBatteryLifeRemainingValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblBatteryLifeRemainingValue.ForeColor = System.Drawing.Color.White;
-            this.lblBatteryLifeRemainingValue.Location = new System.Drawing.Point(170, 100);
+            this.lblBatteryLifeRemainingValue.Location = new System.Drawing.Point(123, 100);
             this.lblBatteryLifeRemainingValue.Name = "lblBatteryLifeRemainingValue";
             this.lblBatteryLifeRemainingValue.Size = new System.Drawing.Size(31, 17);
             this.lblBatteryLifeRemainingValue.TabIndex = 11;
@@ -178,7 +178,7 @@
             // chbAutoStart
             // 
             this.chbAutoStart.AutoSize = true;
-            this.chbAutoStart.Location = new System.Drawing.Point(258, 103);
+            this.chbAutoStart.Location = new System.Drawing.Point(6, 74);
             this.chbAutoStart.Name = "chbAutoStart";
             this.chbAutoStart.Size = new System.Drawing.Size(15, 14);
             this.chbAutoStart.TabIndex = 3;
@@ -190,7 +190,7 @@
             // 
             this.btnHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHide.ForeColor = System.Drawing.Color.White;
-            this.btnHide.Location = new System.Drawing.Point(12, 12);
+            this.btnHide.Location = new System.Drawing.Point(6, 6);
             this.btnHide.Name = "btnHide";
             this.btnHide.Size = new System.Drawing.Size(26, 23);
             this.btnHide.TabIndex = 1;
@@ -226,6 +226,7 @@
             this.Text = "FormMain";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.FormMain_Paint);
             this.ResumeLayout(false);
             this.PerformLayout();
 

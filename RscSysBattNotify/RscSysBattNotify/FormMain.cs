@@ -17,6 +17,12 @@ namespace RscSysBattNotify
     public partial class FormMain : Form
     {
 
+        public class BattLevel
+        {
+            public int iBattPerc;
+            public Color clFore;
+        }
+
         protected const string csAPP_TITLE = "Rsc System Battery Notify v1.05";
         protected const string csAPP_NAME = "RscSysBattNotify";
 
@@ -24,6 +30,8 @@ namespace RscSysBattNotify
         private int m_iBatteryLifePercentPrevTenths = -1;
 
         private NotifyIcon m_notifyIcon = null;
+
+        private List<BattLevel> m_aBattLevels;
 
         // SRC: https://stackoverflow.com/questions/12026664/a-generic-error-occurred-in-gdi-when-calling-bitmap-gethicon
         [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = CharSet.Auto)]
@@ -57,6 +65,8 @@ namespace RscSysBattNotify
             InitializeComponent();
 
             this.Text = csAPP_TITLE;
+
+            m_aBattLevels = new List<BattLevel>();
 
             //Hide Caption Bar
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -162,6 +172,11 @@ namespace RscSysBattNotify
                     iCY = 1;
                     clrBk = Color.Red;
                 }
+                else if (m_iBatteryLifePercentPrev <= 20)
+                {
+                    iCY = 1;
+                    clrBk = Color.OrangeRed;
+                }
                 else if (m_iBatteryLifePercentPrev >= 90)
                 {
                     iCY = 1;
@@ -244,10 +259,20 @@ namespace RscSysBattNotify
             {
                 lblBatteryLifeValue.ForeColor = Color.Red;
             }
+            else if (iBattPerc <= 20)
+            {
+                lblBatteryLifeValue.ForeColor = Color.OrangeRed;
+            }
             else
             {
                 lblBatteryLifeValue.ForeColor = Color.Orange;
             }
+
+            BattLevel bl = new BattLevel();
+            bl.iBattPerc = iBattPerc;
+            bl.clFore = lblBatteryLifeValue.ForeColor;
+            m_aBattLevels.Add(bl);
+
             int iBattPercTenths = iBattPerc / 10;
             if (m_iBatteryLifePercentPrevTenths != iBattPercTenths && m_iBatteryLifePercentPrevTenths > 0)
             {
@@ -259,6 +284,8 @@ namespace RscSysBattNotify
             }
             m_iBatteryLifePercentPrevTenths = iBattPercTenths;
             m_iBatteryLifePercentPrev = iBattPerc;
+
+            if (Visible) Refresh();
 
             lblBatteryFullLifetimeValue.Text = GetPowerStatusValueAsString("BatteryFullLifetime");
             lblBatteryLifeRemainingValue.Text = GetPowerStatusValueAsString("BatteryLifeRemaining");
@@ -299,8 +326,17 @@ namespace RscSysBattNotify
 
                         int iSec = iVal;
 
-                        DateTime dt = new DateTime(1, 1, 1, iHour, iMin, iSec);
-                        return dt.ToShortTimeString();
+                        try
+                        {
+                            DateTime dt = new DateTime(1, 1, 1, iHour, iMin, iSec);
+                            return dt.ToShortTimeString();
+                        }
+                        catch (Exception /*exc*/)
+                        {
+                            //NOP...
+                        }
+
+                        return "N/A";
                     }
                     else if (sName == "BatteryChargeStatus")
                     {
@@ -411,6 +447,56 @@ namespace RscSysBattNotify
             if (m_notifyIcon != null && m_notifyIcon.Visible)
             {
                 Visible = false;
+            }
+        }
+
+        private void FormMain_Paint(object sender, PaintEventArgs e)
+        {
+
+            Point ptBottomLeft = new Point();
+            ptBottomLeft.X = lblBatteryLifeValue.Location.X + lblBatteryLifeValue.Size.Width + 10;
+            ptBottomLeft.Y = lblBatteryLifeRemainingValue.Location.Y + lblBatteryLifeRemainingValue.Size.Height;
+
+            Point ptTopRight = new Point();
+            ptTopRight.X = ClientRectangle.Left + ClientRectangle.Width - 5;
+            ptTopRight.Y = ptBottomLeft.Y - 102;
+
+            Pen pen = new Pen(Color.Gray);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y, ptTopRight.X, ptBottomLeft.Y);
+            e.Graphics.DrawLine(pen, ptBottomLeft.X, ptTopRight.Y, ptTopRight.X, ptTopRight.Y);
+            pen.Dispose();
+            pen = null;
+
+            int iMaxCnt = (ptTopRight.X - ptBottomLeft.X) + 1;
+
+            while (m_aBattLevels.Count > iMaxCnt)
+            {
+                m_aBattLevels.RemoveAt(0);
+            }
+
+            for (int i = 0; i < m_aBattLevels.Count; i++)
+            {
+                if ((i == 0) || (m_aBattLevels[i - 1].clFore != m_aBattLevels[i].clFore))
+                {
+                    if (pen != null)
+                    {
+                        pen.Dispose();
+                        pen = null;
+                    }
+
+                    pen = new Pen(m_aBattLevels[i].clFore);
+                }
+
+                if (m_aBattLevels[i].iBattPerc > 0)
+                {
+                    e.Graphics.DrawLine(pen, ptBottomLeft.X + i, ptBottomLeft.Y - 1, ptBottomLeft.X + i, ptBottomLeft.Y - m_aBattLevels[i].iBattPerc);
+                }
+            }
+
+            if (pen != null)
+            {
+                pen.Dispose();
+                pen = null;
             }
         }
     }
