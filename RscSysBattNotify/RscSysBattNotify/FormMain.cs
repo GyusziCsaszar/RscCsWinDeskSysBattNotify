@@ -17,7 +17,7 @@ namespace RscSysBattNotify
     public partial class FormMain : Form
     {
 
-        protected const string csAPP_TITLE = "Rsc System Battery Notify v1.04";
+        protected const string csAPP_TITLE = "Rsc System Battery Notify v1.05";
         protected const string csAPP_NAME = "RscSysBattNotify";
 
         private int m_iBatteryLifePercentPrev = -1;
@@ -207,7 +207,11 @@ namespace RscSysBattNotify
             lblBatteryChargeValue.Text = GetPowerStatusValueAsString("BatteryChargeStatus");
 
             lblBatteryLifeValue.Text = GetPowerStatusValueAsString("BatteryLifePercent");
-            int iBattPerc = Int32.Parse(lblBatteryLifeValue.Text.Substring(0, 3).Trim());
+            int iBattPerc = 0;
+            if (!Int32.TryParse(lblBatteryLifeValue.Text.Substring(0, 3).Trim(), out iBattPerc))
+            {
+                iBattPerc = Int32.Parse(lblBatteryLifeValue.Text.Substring(0, 2).Trim());
+            }
             if (iBattPerc >= 90)
             {
                 lblBatteryLifeValue.ForeColor = Color.Green;
