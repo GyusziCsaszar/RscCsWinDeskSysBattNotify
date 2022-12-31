@@ -41,9 +41,10 @@
             this.pnlLow = new System.Windows.Forms.Panel();
             this.tbRangeLow = new System.Windows.Forms.TextBox();
             this.tbRangeNormal = new System.Windows.Forms.TextBox();
-            this.pnlMid = new System.Windows.Forms.Panel();
+            this.pnlMidLow = new System.Windows.Forms.Panel();
             this.tbRangeHigh = new System.Windows.Forms.TextBox();
             this.pnlHigh = new System.Windows.Forms.Panel();
+            this.pnlMidHigh = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // lblLogPath
@@ -187,28 +188,28 @@
             this.tbRangeNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbRangeNormal.BackColor = System.Drawing.Color.Gainsboro;
             this.tbRangeNormal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbRangeNormal.Location = new System.Drawing.Point(238, 145);
+            this.tbRangeNormal.Location = new System.Drawing.Point(276, 145);
             this.tbRangeNormal.Name = "tbRangeNormal";
             this.tbRangeNormal.Size = new System.Drawing.Size(37, 20);
             this.tbRangeNormal.TabIndex = 19;
             this.tbRangeNormal.Text = "90";
             this.tbRangeNormal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // pnlMid
+            // pnlMidLow
             // 
-            this.pnlMid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pnlMid.BackColor = System.Drawing.Color.Orange;
-            this.pnlMid.Location = new System.Drawing.Point(207, 148);
-            this.pnlMid.Name = "pnlMid";
-            this.pnlMid.Size = new System.Drawing.Size(25, 12);
-            this.pnlMid.TabIndex = 18;
+            this.pnlMidLow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlMidLow.BackColor = System.Drawing.Color.Orange;
+            this.pnlMidLow.Location = new System.Drawing.Point(207, 148);
+            this.pnlMidLow.Name = "pnlMidLow";
+            this.pnlMidLow.Size = new System.Drawing.Size(25, 12);
+            this.pnlMidLow.TabIndex = 18;
             // 
             // tbRangeHigh
             // 
             this.tbRangeHigh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbRangeHigh.BackColor = System.Drawing.Color.Gainsboro;
             this.tbRangeHigh.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbRangeHigh.Location = new System.Drawing.Point(313, 145);
+            this.tbRangeHigh.Location = new System.Drawing.Point(352, 145);
             this.tbRangeHigh.Name = "tbRangeHigh";
             this.tbRangeHigh.ReadOnly = true;
             this.tbRangeHigh.Size = new System.Drawing.Size(37, 20);
@@ -220,10 +221,19 @@
             // 
             this.pnlHigh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlHigh.BackColor = System.Drawing.Color.LimeGreen;
-            this.pnlHigh.Location = new System.Drawing.Point(282, 148);
+            this.pnlHigh.Location = new System.Drawing.Point(321, 148);
             this.pnlHigh.Name = "pnlHigh";
             this.pnlHigh.Size = new System.Drawing.Size(25, 12);
             this.pnlHigh.TabIndex = 20;
+            // 
+            // pnlMidHigh
+            // 
+            this.pnlMidHigh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlMidHigh.BackColor = System.Drawing.Color.DarkKhaki;
+            this.pnlMidHigh.Location = new System.Drawing.Point(241, 148);
+            this.pnlMidHigh.Name = "pnlMidHigh";
+            this.pnlMidHigh.Size = new System.Drawing.Size(25, 12);
+            this.pnlMidHigh.TabIndex = 22;
             // 
             // FormGraph
             // 
@@ -231,10 +241,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(437, 261);
+            this.Controls.Add(this.pnlMidHigh);
             this.Controls.Add(this.tbRangeHigh);
             this.Controls.Add(this.pnlHigh);
             this.Controls.Add(this.tbRangeNormal);
-            this.Controls.Add(this.pnlMid);
+            this.Controls.Add(this.pnlMidLow);
             this.Controls.Add(this.tbRangeLow);
             this.Controls.Add(this.pnlLow);
             this.Controls.Add(this.tbRangeEmpty);
@@ -276,8 +287,9 @@
         private System.Windows.Forms.Panel pnlLow;
         private System.Windows.Forms.TextBox tbRangeLow;
         private System.Windows.Forms.TextBox tbRangeNormal;
-        private System.Windows.Forms.Panel pnlMid;
+        private System.Windows.Forms.Panel pnlMidLow;
         private System.Windows.Forms.TextBox tbRangeHigh;
         private System.Windows.Forms.Panel pnlHigh;
+        private System.Windows.Forms.Panel pnlMidHigh;
     }
 }

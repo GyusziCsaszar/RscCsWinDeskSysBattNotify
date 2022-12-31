@@ -19,7 +19,7 @@ namespace RscSysBattNotify
     public partial class FormMain : Form
     {
 
-        public const string csAPP_TITLE = "Rsc System Battery Notify v2.02";
+        public const string csAPP_TITLE = "Rsc System Battery Notify v2.03";
         protected const string csAPP_NAME = "RscSysBattNotify";
 
         private int m_iBatteryLifePercentPrev = -1;
@@ -195,22 +195,22 @@ namespace RscSysBattNotify
                     iCY = 1;
                     clrBk = Color.Red;
                 }
+                else if (m_iBatteryLifePercentPrev >= m_iRangeNormal)
+                {
+                    iCY = 1;
+                    clrBk = Color.Green;
+                }
                 else if (m_iBatteryLifePercentPrev <= m_iRangeLow + 10)
                 {
                     iCY = 1;
                     clrTx = Color.Black;
                     clrBk = Color.Orange;
                 }
-                else if (m_iBatteryLifePercentPrev >= m_iRangeNormal)
-                {
-                    iCY = 1;
-                    clrBk = Color.Green;
-                }
                 else
                 {
                     iCY = 1;
                     clrTx = Color.Black;
-                    clrBk = Color.YellowGreen;
+                    clrBk = Color.DarkKhaki;
                 }
 
                 //m_NotifyIcon.Icon = SystemIcons.Exclamation;
@@ -266,7 +266,9 @@ namespace RscSysBattNotify
 
         private void RefreshPowerStatus()
         {
-            lblPowerLineValue.Text = GetPowerStatusValueAsString("PowerLineStatus");
+            string sPwrLine = GetPowerStatusValueAsString("PowerLineStatus");
+            bool bCharging = sPwrLine != "Offline";
+            lblPowerLineValue.Text = sPwrLine;
 
             lblBatteryChargeValue.Text = GetPowerStatusValueAsString("BatteryChargeStatus");
 
@@ -281,34 +283,74 @@ namespace RscSysBattNotify
                 iBattPerc = Int32.Parse(lblBatteryLifeValue.Text.Substring(0, 2).Trim());
             }
 
-            if (iBattPerc >= m_iRangeNormal)
+            //DEBUG only
+            //iBattPerc = 40;
+
+            Color clrBattPerc;
+            if (iBattPerc <= m_iRangeLow)
             {
+                clrBattPerc = Color.Red;
+                if (bCharging)
+                {
+                    BackColor = Color.DarkRed;
+                    lblBatteryLifeValue.ForeColor = Color.White;
+                }
+                else
+                {
+                    BackColor = Color.DarkRed;
+                    lblBatteryLifeValue.ForeColor = Color.White;
+                }
+            }
+            else if (iBattPerc >= m_iRangeNormal)
+            {
+                clrBattPerc = Color.Green;
                 BackColor = Color.Black;
                 lblBatteryLifeValue.ForeColor = Color.Green;
             }
-            else if (iBattPerc <= m_iRangeLow)
-            {
-                BackColor = Color.Red;
-                lblBatteryLifeValue.ForeColor = Color.Red;
-            }
             else if (iBattPerc <= (m_iRangeLow + 10))
             {
-                BackColor = Color.Orange;
-                lblBatteryLifeValue.ForeColor = Color.Orange;
+                clrBattPerc = Color.Orange;
+                if (bCharging)
+                {
+                    BackColor = Color.Black;
+                    lblBatteryLifeValue.ForeColor = Color.Orange;
+                }
+                else
+                {
+                    BackColor = Color.Peru;
+                    lblBatteryLifeValue.ForeColor = Color.White;
+                }
             }
             else
             {
+                clrBattPerc = Color.DarkKhaki;
                 BackColor = Color.Black;
-                lblBatteryLifeValue.ForeColor = Color.YellowGreen;
+                lblBatteryLifeValue.ForeColor = Color.DarkKhaki;
             }
 
             BattLevel bl = new BattLevel();
             bl.iBattPerc = iBattPerc;
-            bl.clFore = lblBatteryLifeValue.ForeColor;
+            bl.clFore = clrBattPerc;
             BatteryLevelStore.BatteryLevelList.Add(bl);
 
             int iBattPercTenths = iBattPerc / 10;
-            if (m_iBatteryLifePercentPrevTenths != iBattPercTenths && m_iBatteryLifePercentPrevTenths > 0)
+            bool bPopUp = false;
+            if (m_iBatteryLifePercentPrevTenths > 0)
+            {
+                if (m_iBatteryLifePercentPrevTenths != iBattPercTenths)
+                {
+                    bPopUp = true;
+                }
+                else if ((m_iBatteryLifePercentPrev > m_iRangeLow) && (iBattPerc <= m_iRangeLow))
+                {
+                    bPopUp = true;
+                }
+                else if ((m_iBatteryLifePercentPrev > m_iRangeLow + 10) && (iBattPerc <= m_iRangeLow + 10))
+                {
+                    bPopUp = true;
+                }
+            }
+            if (bPopUp)
             {
                 if (!Visible)
                 {
