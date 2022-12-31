@@ -43,6 +43,7 @@
             this.tmrRefresh = new System.Windows.Forms.Timer(this.components);
             this.chbAutoStart = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnHide = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnClose
@@ -52,8 +53,9 @@
             this.btnClose.Location = new System.Drawing.Point(247, 12);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(26, 23);
-            this.btnClose.TabIndex = 1;
+            this.btnClose.TabIndex = 13;
             this.btnClose.Text = "X";
+            this.toolTip1.SetToolTip(this.btnClose, "Exit application");
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
@@ -184,12 +186,26 @@
             this.chbAutoStart.UseVisualStyleBackColor = true;
             this.chbAutoStart.CheckedChanged += new System.EventHandler(this.chbAutoStart_CheckedChanged);
             // 
+            // btnHide
+            // 
+            this.btnHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHide.ForeColor = System.Drawing.Color.White;
+            this.btnHide.Location = new System.Drawing.Point(12, 12);
+            this.btnHide.Name = "btnHide";
+            this.btnHide.Size = new System.Drawing.Size(26, 23);
+            this.btnHide.TabIndex = 1;
+            this.btnHide.Text = "V";
+            this.toolTip1.SetToolTip(this.btnHide, "Hide this window");
+            this.btnHide.UseVisualStyleBackColor = true;
+            this.btnHide.Click += new System.EventHandler(this.btnHide_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(284, 126);
+            this.Controls.Add(this.btnHide);
             this.Controls.Add(this.chbAutoStart);
             this.Controls.Add(this.lblBatteryLifeRemainingValue);
             this.Controls.Add(this.lblBatteryLifeRemaining);
@@ -231,6 +247,7 @@
         private System.Windows.Forms.Timer tmrRefresh;
         private System.Windows.Forms.CheckBox chbAutoStart;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnHide;
     }
 }
 
