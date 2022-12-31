@@ -19,7 +19,7 @@ namespace RscSysBattNotify
     public partial class FormMain : Form
     {
 
-        public const string csAPP_TITLE = "Rsc System Battery Notify v2.01";
+        public const string csAPP_TITLE = "Rsc System Battery Notify v2.02";
         protected const string csAPP_NAME = "RscSysBattNotify";
 
         private int m_iBatteryLifePercentPrev = -1;
@@ -190,17 +190,18 @@ namespace RscSysBattNotify
                 Color clrTx = Color.White;
                 Color clrBk = Color.DodgerBlue;
                 int iCY = 2;
-                if (m_iBatteryLifePercentPrev <= 10)
+                if (m_iBatteryLifePercentPrev <= m_iRangeLow)
                 {
                     iCY = 1;
                     clrBk = Color.Red;
                 }
-                else if (m_iBatteryLifePercentPrev <= 20)
+                else if (m_iBatteryLifePercentPrev <= m_iRangeLow + 10)
                 {
                     iCY = 1;
-                    clrBk = Color.OrangeRed;
+                    clrTx = Color.Black;
+                    clrBk = Color.Orange;
                 }
-                else if (m_iBatteryLifePercentPrev >= 90)
+                else if (m_iBatteryLifePercentPrev >= m_iRangeNormal)
                 {
                     iCY = 1;
                     clrBk = Color.Green;
@@ -209,7 +210,7 @@ namespace RscSysBattNotify
                 {
                     iCY = 1;
                     clrTx = Color.Black;
-                    clrBk = Color.Orange;
+                    clrBk = Color.YellowGreen;
                 }
 
                 //m_NotifyIcon.Icon = SystemIcons.Exclamation;
@@ -279,21 +280,26 @@ namespace RscSysBattNotify
             {
                 iBattPerc = Int32.Parse(lblBatteryLifeValue.Text.Substring(0, 2).Trim());
             }
+
             if (iBattPerc >= m_iRangeNormal)
             {
+                BackColor = Color.Black;
                 lblBatteryLifeValue.ForeColor = Color.Green;
             }
             else if (iBattPerc <= m_iRangeLow)
             {
+                BackColor = Color.Red;
                 lblBatteryLifeValue.ForeColor = Color.Red;
             }
             else if (iBattPerc <= (m_iRangeLow + 10))
             {
-                lblBatteryLifeValue.ForeColor = Color.OrangeRed;
+                BackColor = Color.Orange;
+                lblBatteryLifeValue.ForeColor = Color.Orange;
             }
             else
             {
-                lblBatteryLifeValue.ForeColor = Color.Orange;
+                BackColor = Color.Black;
+                lblBatteryLifeValue.ForeColor = Color.YellowGreen;
             }
 
             BattLevel bl = new BattLevel();
