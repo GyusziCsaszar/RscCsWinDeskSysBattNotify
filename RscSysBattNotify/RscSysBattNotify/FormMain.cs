@@ -455,7 +455,8 @@ namespace RscSysBattNotify
 
             Point ptBottomLeft = new Point();
             ptBottomLeft.X = lblBatteryLifeValue.Location.X + lblBatteryLifeValue.Size.Width + 10;
-            ptBottomLeft.Y = lblBatteryLifeRemainingValue.Location.Y + lblBatteryLifeRemainingValue.Size.Height;
+            //ptBottomLeft.Y = lblBatteryLifeRemainingValue.Location.Y +lblBatteryLifeRemainingValue.Size.Height;
+            ptBottomLeft.Y = lblRefreshRate.Location.Y - 2;
 
             Point ptTopRight = new Point();
             ptTopRight.X = ClientRectangle.Left + ClientRectangle.Width - 5;

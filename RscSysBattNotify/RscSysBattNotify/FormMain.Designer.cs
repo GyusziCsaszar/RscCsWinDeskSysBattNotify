@@ -44,6 +44,7 @@
             this.chbAutoStart = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnHide = new System.Windows.Forms.Button();
+            this.lblRefreshRate = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnClose
@@ -86,7 +87,7 @@
             this.lblBatteryCharge.AutoSize = true;
             this.lblBatteryCharge.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblBatteryCharge.ForeColor = System.Drawing.Color.White;
-            this.lblBatteryCharge.Location = new System.Drawing.Point(24, 41);
+            this.lblBatteryCharge.Location = new System.Drawing.Point(15, 41);
             this.lblBatteryCharge.Name = "lblBatteryCharge";
             this.lblBatteryCharge.Size = new System.Drawing.Size(58, 17);
             this.lblBatteryCharge.TabIndex = 4;
@@ -97,7 +98,7 @@
             this.lblBatteryChargeValue.AutoSize = true;
             this.lblBatteryChargeValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblBatteryChargeValue.ForeColor = System.Drawing.Color.White;
-            this.lblBatteryChargeValue.Location = new System.Drawing.Point(83, 41);
+            this.lblBatteryChargeValue.Location = new System.Drawing.Point(74, 41);
             this.lblBatteryChargeValue.Name = "lblBatteryChargeValue";
             this.lblBatteryChargeValue.Size = new System.Drawing.Size(31, 17);
             this.lblBatteryChargeValue.TabIndex = 5;
@@ -178,7 +179,7 @@
             // chbAutoStart
             // 
             this.chbAutoStart.AutoSize = true;
-            this.chbAutoStart.Location = new System.Drawing.Point(6, 74);
+            this.chbAutoStart.Location = new System.Drawing.Point(7, 74);
             this.chbAutoStart.Name = "chbAutoStart";
             this.chbAutoStart.Size = new System.Drawing.Size(15, 14);
             this.chbAutoStart.TabIndex = 3;
@@ -199,12 +200,24 @@
             this.btnHide.UseVisualStyleBackColor = true;
             this.btnHide.Click += new System.EventHandler(this.btnHide_Click);
             // 
+            // lblRefreshRate
+            // 
+            this.lblRefreshRate.AutoSize = true;
+            this.lblRefreshRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblRefreshRate.ForeColor = System.Drawing.Color.LightGray;
+            this.lblRefreshRate.Location = new System.Drawing.Point(187, 109);
+            this.lblRefreshRate.Name = "lblRefreshRate";
+            this.lblRefreshRate.Size = new System.Drawing.Size(87, 12);
+            this.lblRefreshRate.TabIndex = 12;
+            this.lblRefreshRate.Text = "Refresh Rate: 1 min";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(284, 126);
+            this.Controls.Add(this.lblRefreshRate);
             this.Controls.Add(this.btnHide);
             this.Controls.Add(this.chbAutoStart);
             this.Controls.Add(this.lblBatteryLifeRemainingValue);
@@ -249,6 +262,7 @@
         private System.Windows.Forms.CheckBox chbAutoStart;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button btnHide;
+        private System.Windows.Forms.Label lblRefreshRate;
     }
 }
 
