@@ -23,7 +23,7 @@ namespace RscSysBattNotify
             public Color clFore;
         }
 
-        protected const string csAPP_TITLE = "Rsc System Battery Notify v1.05";
+        public const string csAPP_TITLE = "Rsc System Battery Notify v1.05";
         protected const string csAPP_NAME = "RscSysBattNotify";
 
         private int m_iBatteryLifePercentPrev = -1;
@@ -32,6 +32,11 @@ namespace RscSysBattNotify
         private NotifyIcon m_notifyIcon = null;
 
         private List<BattLevel> m_aBattLevels;
+        private Rectangle m_rcGraph;
+        private bool m_bGraphClickStarted = false;
+
+        private bool m_bDoLog;
+        private string m_sLogPath;
 
         // SRC: https://stackoverflow.com/questions/12026664/a-generic-error-occurred-in-gdi-when-calling-bitmap-gethicon
         [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = CharSet.Auto)]
@@ -64,11 +69,16 @@ namespace RscSysBattNotify
         {
             InitializeComponent();
 
-            this.Text = csAPP_TITLE;
+            StorageRegistry.m_sAppName  = csAPP_NAME;
+            this.Text                   = csAPP_TITLE;
+
+            m_sLogPath = StorageRegistry.Read("LogPath", "");
+            m_bDoLog = (System.IO.File.Exists(m_sLogPath)) && (StorageRegistry.Read("DoLog", 0) > 0);
 
             MessageBoxEx.DarkMode = true;
 
             m_aBattLevels = new List<BattLevel>();
+            m_rcGraph = new Rectangle(0, 0, 0, 0);
 
             //Hide Caption Bar
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -76,6 +86,18 @@ namespace RscSysBattNotify
             PlaceWindow();
 
             chbAutoStart.Checked = IsAppStartWithWindowsOn();
+
+            if (m_bDoLog)
+            {
+                try
+                {
+                    System.IO.File.AppendAllText(m_sLogPath, "\r\n"); //Mark App Start...
+                }
+                catch (Exception exc)
+                {
+                    MessageBoxEx.Show("Unable to write LOG file (" + m_sLogPath + ")!\r\n\r\nError: " + exc.Message, FormMain.csAPP_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error, true /*bTopMost*/);
+                }
+            }
 
             RefreshPowerStatus();
 
@@ -291,6 +313,22 @@ namespace RscSysBattNotify
 
             lblBatteryFullLifetimeValue.Text = GetPowerStatusValueAsString("BatteryFullLifetime");
             lblBatteryLifeRemainingValue.Text = GetPowerStatusValueAsString("BatteryLifeRemaining");
+
+            if (m_bDoLog)
+            {
+                try
+                {
+                    DateTime dt = DateTime.Now;
+
+                    string sLn = dt.ToShortDateString() + "; " + dt.ToShortTimeString() + "; " + dt.Millisecond.ToString() + "; " + iBattPerc.ToString() + " %\r\n";
+
+                    System.IO.File.AppendAllText(m_sLogPath, sLn);
+                }
+                catch (Exception exc)
+                {
+                    MessageBoxEx.Show("Unable to write LOG file (" + m_sLogPath + ")!\r\n\r\nError: " + exc.Message, FormMain.csAPP_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error, true /*bTopMost*/);
+                }
+            }
         }
 
         private string GetPowerStatusValueAsString(string sName)
@@ -455,6 +493,8 @@ namespace RscSysBattNotify
         private void FormMain_Paint(object sender, PaintEventArgs e)
         {
 
+            Pen pen;
+
             Point ptBottomLeft = new Point();
             ptBottomLeft.X = lblBatteryLifeValue.Location.X + lblBatteryLifeValue.Size.Width + 10;
             //ptBottomLeft.Y = lblBatteryLifeRemainingValue.Location.Y +lblBatteryLifeRemainingValue.Size.Height;
@@ -464,7 +504,15 @@ namespace RscSysBattNotify
             ptTopRight.X = ClientRectangle.Left + ClientRectangle.Width - 5;
             ptTopRight.Y = ptBottomLeft.Y - 102;
 
-            Pen pen = new Pen(Color.Gray);
+            m_rcGraph = new Rectangle(ptBottomLeft.X, ptTopRight.Y, ptTopRight.X - ptBottomLeft.X, ptBottomLeft.Y - ptTopRight.Y);
+            /*
+            pen = new Pen(Color.Red);
+            e.Graphics.DrawRectangle(pen, m_rcGraph);
+            pen.Dispose();
+            pen = null;
+            */
+
+            pen = new Pen(Color.Gray);
             e.Graphics.DrawLine(pen, ptBottomLeft.X, ptBottomLeft.Y, ptTopRight.X, ptBottomLeft.Y);
             e.Graphics.DrawLine(pen, ptBottomLeft.X, ptTopRight.Y, ptTopRight.X, ptTopRight.Y);
             pen.Dispose();
@@ -485,12 +533,16 @@ namespace RscSysBattNotify
 
             int iMaxCnt = (ptTopRight.X - ptBottomLeft.X) + 1;
 
+            // In FormGraph show all levels gathered...
+            /*
             while (m_aBattLevels.Count > iMaxCnt)
             {
                 m_aBattLevels.RemoveAt(0);
             }
+            */
+            int iFrom = Math.Max(0, m_aBattLevels.Count - iMaxCnt);
 
-            for (int i = 0; i < m_aBattLevels.Count; i++)
+            for (int i = iFrom; i < m_aBattLevels.Count; i++)
             {
                 if ((i == 0) || (m_aBattLevels[i - 1].clFore != m_aBattLevels[i].clFore))
                 {
@@ -513,6 +565,40 @@ namespace RscSysBattNotify
             {
                 pen.Dispose();
                 pen = null;
+            }
+        }
+
+        private void FormMain_MouseDown(object sender, MouseEventArgs e)
+        {
+            m_bGraphClickStarted = false;
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                Point pt = new Point(e.X, e.Y);
+                if (m_rcGraph.Contains(pt))
+                {
+                    m_bGraphClickStarted = true;
+                }
+            }
+        }
+
+        private void FormMain_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (m_bGraphClickStarted)
+            {
+                if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                {
+                    Point pt = new Point(e.X, e.Y);
+                    if (m_rcGraph.Contains(pt))
+                    {
+                        m_bGraphClickStarted = false;
+
+                        FormGraph frm = new FormGraph();
+                        DialogResult dr = frm.ShowDialog();
+
+                        m_sLogPath = StorageRegistry.Read("LogPath", "");
+                        m_bDoLog = (System.IO.File.Exists(m_sLogPath)) && (StorageRegistry.Read("DoLog", 0) > 0);
+                    }
+                }
             }
         }
     }

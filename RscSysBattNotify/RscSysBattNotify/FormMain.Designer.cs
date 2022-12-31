@@ -240,6 +240,8 @@
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FormMain_Paint);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseDown);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 

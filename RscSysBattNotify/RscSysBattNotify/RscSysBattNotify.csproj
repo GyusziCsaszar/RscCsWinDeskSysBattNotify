@@ -57,6 +57,15 @@
       <Link>MessageBoxEx.designer.cs</Link>
       <DependentUpon>MessageBoxEx.cs</DependentUpon>
     </Compile>
+    <Compile Include="..\RscUtilsCs\StorageRegistry.cs">
+      <Link>StorageRegistry.cs</Link>
+    </Compile>
+    <Compile Include="FormGraph.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGraph.Designer.cs">
+      <DependentUpon>FormGraph.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +77,9 @@
     <EmbeddedResource Include="..\RscUtilsCs\MessageBoxEx.resx">
       <Link>MessageBoxEx.resx</Link>
       <DependentUpon>MessageBoxEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGraph.resx">
+      <DependentUpon>FormGraph.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
