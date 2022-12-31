@@ -285,6 +285,17 @@ namespace Ressive.Utils
 
             ApplyCaptionSize();
             ApplyTextSize();
+
+            // FIX!
+            Rectangle rect = Screen.FromControl(this).WorkingArea; // Bounds;
+            if (Top + Height > rect.Top + rect.Height)
+            {
+                Top = (rect.Top + rect.Height) - Height;
+            }
+            if (Left + Width > rect.Left + rect.Width)
+            {
+                Left = (rect.Left + rect.Width) - Width;
+            }
         }
 
         private void ApplyCaptionSize()

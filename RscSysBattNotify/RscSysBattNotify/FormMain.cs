@@ -17,7 +17,7 @@ namespace RscSysBattNotify
     public partial class FormMain : Form
     {
 
-        public const string csAPP_TITLE = "Rsc System Battery Notify v1.05";
+        public const string csAPP_TITLE = "Rsc System Battery Notify v1.16";
         protected const string csAPP_NAME = "RscSysBattNotify";
 
         private int m_iBatteryLifePercentPrev = -1;
