@@ -21,6 +21,8 @@ namespace Ressive.Utils
 
         public static Font CustomFont = null;
 
+        public static bool DarkMode = false;
+
         public static DialogResult Show(string text)
         {
             return Show(text, "");
@@ -52,6 +54,32 @@ namespace Ressive.Utils
             dlg.tbText.Text = text;
 
             s_bDisableX = false;
+
+            if (DarkMode)
+            {
+                dlg.BackColor = Color.Black;
+                dlg.ForeColor = Color.White;
+
+                dlg.tbText.BackColor = Color.Black;
+                dlg.tbText.ForeColor = Color.White;
+
+                dlg.pbIcon.BackColor = Color.Black;
+
+                dlg.pnlButtons.BackColor = Color.FromArgb(64, 64, 64); //Color.DimGray;
+                dlg.pnlButtons.ForeColor = Color.White;
+
+                dlg.btn1.BackColor = Color.Black;
+                dlg.btn1.ForeColor = Color.White;
+                dlg.btn1.FlatStyle = FlatStyle.Flat;
+
+                dlg.btn2.BackColor = Color.Black;
+                dlg.btn2.ForeColor = Color.White;
+                dlg.btn2.FlatStyle = FlatStyle.Flat;
+
+                dlg.btn3.BackColor = Color.Black;
+                dlg.btn3.ForeColor = Color.White;
+                dlg.btn3.FlatStyle = FlatStyle.Flat;
+            }
 
             if (icon != MessageBoxIcon.None)
             {

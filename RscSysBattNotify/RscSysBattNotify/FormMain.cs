@@ -66,6 +66,8 @@ namespace RscSysBattNotify
 
             this.Text = csAPP_TITLE;
 
+            MessageBoxEx.DarkMode = true;
+
             m_aBattLevels = new List<BattLevel>();
 
             //Hide Caption Bar
